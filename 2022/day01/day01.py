@@ -1,7 +1,7 @@
 data = open("./input.txt").read().split("\n\n")
 
 # part 1
-cal = [sum(map(lambda x: int(x), di.split())) for di in data]
+cal = [sum(map(int, di.split())) for di in data]
 print(max(cal))
 
 # part 2

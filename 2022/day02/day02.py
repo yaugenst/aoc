@@ -1,6 +1,6 @@
 data = open("input.txt").read()
 
-points = {"A": 1, "B": 2, "C": 3, "X": 1, "Y": 2, "Z": 3}
+points = {"X": 1, "Y": 2, "Z": 3}
 beat = {"C": "X", "A": "Y", "B": "Z"}
 draw = {"A": "X", "B": "Y", "C": "Z"}
 lose = {"B": "X", "C": "Y", "A": "Z"}

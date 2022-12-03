@@ -6,7 +6,7 @@ function part1(data)
     p = 0
     for line in data
         s = length(line) ÷ 2
-        a, b = line[1:s], line[end-s+1:end]
+        a, b = line[1:s], line[s+1:end]
         p += priority(only(a ∩ b))
     end
     return p

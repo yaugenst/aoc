@@ -3,11 +3,9 @@ data = open("input.txt").read().strip().split()
 # part 1
 p = 0
 for line in data:
-    a, b = line[: len(line) // 2], line[-len(line) // 2 :]
+    s = len(line) // 2
+    a, b = line[:s], line[s:]
     unique = (set(a) & set(b)).pop()
-    print(ord("a"), ord("A"))
-    print(unique, ord(unique), ord(unique) - ord("A") + 27)
-    exit()
     if unique.islower():
         p += ord(unique) - ord("a") + 1
     else:

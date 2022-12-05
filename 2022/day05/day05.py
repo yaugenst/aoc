@@ -11,9 +11,6 @@ for line in stacks.split("\n")[:-1]:
 for move in moves.split("\n"):
     a, b, c = map(int, re.findall(r"\d+", move))
 
-    # part 1
-    sd[c] = [sd[b].pop(0) for _ in range(a)][::-1] + sd[c]
-
-    # # part 2
-    # sd[c] = [sd[b].pop(0) for _ in range(a)] + sd[c]
+    sd[c] = [sd[b].pop(0) for _ in range(a)][::-1] + sd[c]  # part 1
+    # sd[c] = [sd[b].pop(0) for _ in range(a)] + sd[c]  # part2
 print("".join([v[0] for v in sd.values()]))

@@ -2,7 +2,7 @@ import re
 
 stacks, moves = open("input.txt").read().split("\n\n")
 
-sd = {k: [] for k in map(int, re.findall(r"[\d+]", stacks.split("\n")[-1]))}
+sd = {k: [] for k in map(int, re.findall(r"\d+", stacks.split("\n")[-1]))}
 for line in stacks.split("\n")[:-1]:
     for n, idx in enumerate(range(1, len(line), 4)):
         if line[idx] != " ":

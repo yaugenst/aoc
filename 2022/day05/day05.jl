@@ -10,8 +10,8 @@ function main()
     for move in split(moves, "\n")
         a, b, c = map(x -> parse(Int, x.match), eachmatch(r"\d+", move))
 
-        # prepend!(ds[c], reverse([popfirst!(ds[b]) for _ in 1:a])) # part 1
-        prepend!(ds[c], [popfirst!(ds[b]) for _ in 1:a])  # part 2
+        prepend!(ds[c], reverse(splice!(ds[b], 1:a)))  # part 1
+        # prepend!(ds[c], splice!(ds[b], 1:a))  # part 2
     end
 
     @show join(map(x -> ds[x][1], 1:length(idxs)))

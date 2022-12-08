@@ -22,22 +22,22 @@ scores = []
 for i in range(1, len(grid) - 1):
     for j in range(1, len(grid) - 1):
         l = 0
-        for ii, g in enumerate(grid[i][:j][::-1]):
+        for g in grid[i][:j][::-1]:
             l += 1
             if g >= grid[i][j]:
                 break
         r = 0
-        for ii, g in enumerate(grid[i][j + 1 :]):
+        for g in grid[i][j + 1 :]:
             r += 1
             if g >= grid[i][j]:
                 break
         t = 0
-        for ii, g in enumerate([grid[k][j] for k in range(i)][::-1]):
+        for g in [grid[k][j] for k in range(i)][::-1]:
             t += 1
             if g >= grid[i][j]:
                 break
         b = 0
-        for ii, g in enumerate([grid[k][j] for k in range(i + 1, len(grid[0]))]):
+        for g in [grid[k][j] for k in range(i + 1, len(grid[0]))]:
             b += 1
             if g >= grid[i][j]:
                 break

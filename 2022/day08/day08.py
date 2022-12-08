@@ -8,13 +8,13 @@ for line in data:
 visible = 2 * (len(grid) + len(grid[0]) - 2)
 for i in range(1, len(grid) - 1):
     for j in range(1, len(grid) - 1):
-        h = all(grid[i][j] > g for g in grid[i][:j]) or all(
-            grid[i][j] > g for g in grid[i][j + 1 :]
+        gij = grid[i][j]
+        visible += (
+            all(gij > g for g in grid[i][:j])
+            | all(gij > g for g in grid[i][j + 1 :])
+            | all(gij > g for g in (grid[k][j] for k in range(i)))
+            | all(gij > g for g in (grid[k][j] for k in range(i + 1, len(grid[0]))))
         )
-        v = all(grid[i][j] > g for g in [grid[k][j] for k in range(i)]) or all(
-            grid[i][j] > g for g in [grid[k][j] for k in range(i + 1, len(grid[0]))]
-        )
-        visible += h or v
 print(visible)
 
 # part 2

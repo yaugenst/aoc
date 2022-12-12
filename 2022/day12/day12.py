@@ -19,8 +19,7 @@ for i, j in grid:
     adjacency[(i, j)] = []
     for y, x in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]:
         if 0 <= x < len(data[0]) and 0 <= y < len(data):
-            if abs(grid[(i, j)] - grid[(y, x)]) <= 2:
-                adjacency[(i, j)].append((y, x))
+            adjacency[(i, j)].append((y, x))
 
 
 def bfs(nodes, edges, start, end):

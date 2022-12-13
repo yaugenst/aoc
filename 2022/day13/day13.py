@@ -1,26 +1,15 @@
-from functools import cmp_to_key
-from math import prod
+from functools import cmp_to_key, reduce
 
 
-def compare(a, b):
-    match a, b:
-        case int(), int():
-            return (a < b) - (a > b)
-        case list(), list():
-            for ai, bi in zip(a, b):
-                if (x := compare(ai, bi)) != 0:
-                    return x
-            return compare(len(a), len(b))
-        case int(), list():
-            return compare([a], b)
-        case list(), int():
-            return compare(a, [b])
+def cmp(*n):
+    if all(isinstance(x, int) for x in n):
+        return n[0] - n[1]
+    elif not all(isinstance(x, list) for x in n):
+        return cmp(*[[x] if isinstance(x, int) else x for x in n])
+    return x if (x := next((x for x in map(cmp, *n) if x), 0)) else cmp(*map(len, n))
 
 
-data = open("input.txt").read().strip().split("\n\n")
-data = [list(map(eval, x.split("\n"))) for x in data]
-
-print(sum(i for i, ab in enumerate(data, 1) if compare(*ab) == 1))
-
-part2 = sorted(sum(data, div := [[2], [6]]), key=cmp_to_key(compare), reverse=True)
-print(prod(i for i, a in enumerate(part2, 1) if a in div))
+p1 = [[*map(eval, x.split())] for x in open("input.txt").read().split("\n\n")]
+print(sum(i for i, ab in enumerate(p1, 1) if cmp(*ab) < 0))
+p2 = sorted(sum(p1, div := [[2], [6]]), key=cmp_to_key(cmp))
+print(reduce(lambda x, y: x * y, [p2.index(v) + 1 for v in div]))

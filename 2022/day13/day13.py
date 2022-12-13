@@ -1,15 +1,11 @@
 from functools import cmp_to_key
+from math import prod
 
 
 def compare(a, b):
     match a, b:
         case int(), int():
-            if a < b:
-                return 1
-            elif a == b:
-                return 0
-            else:
-                return -1
+            return (a < b) - (a > b)
         case list(), list():
             for ai, bi in zip(a, b):
                 if (x := compare(ai, bi)) != 0:
@@ -24,17 +20,7 @@ def compare(a, b):
 data = open("input.txt").read().strip().split("\n\n")
 data = [list(map(eval, x.split("\n"))) for x in data]
 
-result = 0
-for i, (a, b) in enumerate(data, 1):
-    if compare(a, b) == 1:
-        result += i
-print(result)
+print(sum(i for i, ab in enumerate(data, 1) if compare(*ab) == 1))
 
-
-div = [[2], [6]]
-part2 = sum(data, div)
-result = 1
-for i, line in enumerate(sorted(part2, key=cmp_to_key(compare), reverse=True), 1):
-    if line in div:
-        result *= i
-print(result)
+part2 = sorted(sum(data, div := [[2], [6]]), key=cmp_to_key(compare), reverse=True)
+print(prod(i for i, a in enumerate(part2, 1) if a in div))

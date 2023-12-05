@@ -35,6 +35,23 @@ sub part1 {
     print $sum;
 }
 
+sub part2 {
+    my (@lines) = @_;
+    my @howmany = (1) x scalar @lines;
+    my $sum     = 0;
+    foreach my $i ( 0 .. $#lines ) {
+        my @nums = extract_winning( $lines[$i] );
+        my $len  = scalar @nums;
+        foreach ( 0 .. $howmany[$i] - 1 ) {
+            foreach my $j ( 0 .. $#nums ) { $howmany[ $i + $j + 1 ] += 1; }
+        }
+        $sum += $howmany[$i];
+    }
+    print $sum;
+}
+
 my @lines = readlines( $ENV{INPUT} );
 
 part1(@lines);
+print "\n";
+part2(@lines);
